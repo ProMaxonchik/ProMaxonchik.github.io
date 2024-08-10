@@ -1,7 +1,7 @@
 body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     height: 100vh;
     margin: 0;
@@ -9,6 +9,7 @@ body {
     color: white;
     font-family: 'Arial', sans-serif;
     position: relative;
+    padding-top: 20px; /* Добавим отступ сверху */
 }
 
 canvas {
@@ -16,6 +17,33 @@ canvas {
     border: 5px solid #fff;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    max-width: 100%;
+    height: auto;
+}
+
+#controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#controls button {
+    background-color: #ff4081;
+    color: white;
+    font-size: 24px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#controls button:active {
+    background-color: #ff79b0;
 }
 
 #gameOverContainer {
