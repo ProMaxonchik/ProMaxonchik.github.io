@@ -1,7 +1,7 @@
 const canvas = document.getElementById('gameCanvas');
 const context = canvas.getContext('2d');
 
-const tileSize = 15; // Размер плитки
+const tileSize = 18; // Установлен размер плитки на 18
 const rows = 21;
 const cols = 19;
 canvas.width = cols * tileSize;
@@ -56,42 +56,6 @@ const powerUps = [];
 const map = Array.from({ length: rows }, () => Array(cols).fill('#'));
 const keys = {};
 
-// Добавим логику для управления с помощью свайпов
-let touchStartX = 0;
-let touchStartY = 0;
-let touchEndX = 0;
-let touchEndY = 0;
-
-canvas.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-    touchStartY = e.changedTouches[0].screenY;
-});
-
-canvas.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    touchEndY = e.changedTouches[0].screenY;
-    handleSwipe();
-});
-
-function handleSwipe() {
-    const diffX = touchEndX - touchStartX;
-    const diffY = touchEndY - touchStartY;
-
-    if (Math.abs(diffX) > Math.abs(diffY)) {
-        if (diffX > 0) {
-            pacMan.nextDirection = { dx: pacMan.speed, dy: 0, direction: 'right' }; // Свайп вправо
-        } else {
-            pacMan.nextDirection = { dx: -pacMan.speed, dy: 0, direction: 'left' }; // Свайп влево
-        }
-    } else {
-        if (diffY > 0) {
-            pacMan.nextDirection = { dx: 0, dy: pacMan.speed, direction: 'down' }; // Свайп вниз
-        } else {
-            pacMan.nextDirection = { dx: 0, dy: -pacMan.speed, direction: 'up' }; // Свайп вверх
-        }
-    }
-}
-
 window.addEventListener('keydown', (e) => {
     keys[e.key] = true;
     if (e.key === 'ArrowUp') pacMan.nextDirection = { dx: 0, dy: -pacMan.speed, direction: 'up' };
@@ -102,6 +66,20 @@ window.addEventListener('keydown', (e) => {
 
 window.addEventListener('keyup', (e) => {
     delete keys[e.key];
+});
+
+// Добавим обработчики для виртуальных кнопок
+document.getElementById('up').addEventListener('click', () => {
+    pacMan.nextDirection = { dx: 0, dy: -pacMan.speed, direction: 'up' };
+});
+document.getElementById('down').addEventListener('click', () => {
+    pacMan.nextDirection = { dx: 0, dy: pacMan.speed, direction: 'down' };
+});
+document.getElementById('left').addEventListener('click', () => {
+    pacMan.nextDirection = { dx: -pacMan.speed, dy: 0, direction: 'left' };
+});
+document.getElementById('right').addEventListener('click', () => {
+    pacMan.nextDirection = { dx: pacMan.speed, dy: 0, direction: 'right' };
 });
 
 function createRandomMaze() {
