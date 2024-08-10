@@ -1,9 +1,9 @@
 const canvas = document.getElementById('gameCanvas');
 const context = canvas.getContext('2d');
 
-const tileSize = 32;
-const rows = 6;
-const cols = 5;
+const tileSize = 24;
+const rows = 21;
+const cols = 19;
 canvas.width = cols * tileSize;
 canvas.height = rows * tileSize;
 
