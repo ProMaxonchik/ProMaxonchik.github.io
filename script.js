@@ -1,7 +1,7 @@
 const canvas = document.getElementById('gameCanvas');
 const context = canvas.getContext('2d');
 
-const tileSize = 15;
+const tileSize = 15; // Размер плитки
 const rows = 21;
 const cols = 19;
 canvas.width = cols * tileSize;
@@ -55,6 +55,42 @@ const walls = [];
 const powerUps = [];
 const map = Array.from({ length: rows }, () => Array(cols).fill('#'));
 const keys = {};
+
+// Добавим логику для управления с помощью свайпов
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+
+canvas.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+});
+
+canvas.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    const diffX = touchEndX - touchStartX;
+    const diffY = touchEndY - touchStartY;
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        if (diffX > 0) {
+            pacMan.nextDirection = { dx: pacMan.speed, dy: 0, direction: 'right' }; // Свайп вправо
+        } else {
+            pacMan.nextDirection = { dx: -pacMan.speed, dy: 0, direction: 'left' }; // Свайп влево
+        }
+    } else {
+        if (diffY > 0) {
+            pacMan.nextDirection = { dx: 0, dy: pacMan.speed, direction: 'down' }; // Свайп вниз
+        } else {
+            pacMan.nextDirection = { dx: 0, dy: -pacMan.speed, direction: 'up' }; // Свайп вверх
+        }
+    }
+}
 
 window.addEventListener('keydown', (e) => {
     keys[e.key] = true;
@@ -333,6 +369,5 @@ function gameLoop() {
     }
 }
 
-// Экспортируем функции, чтобы они были доступны в app.js
-window.createWorld = createWorld;
-window.gameLoop = gameLoop;
+window.createWorld();
+window.gameLoop();
