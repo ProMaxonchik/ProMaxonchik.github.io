@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+    <head>
+        <!-- Meta setup -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="keywords" content="">
+        <meta name="decription" content="">
+        <meta name="designer" content="">
+        
+        <!-- Title -->
+        <title>tasks</title>
+        
+        <!-- Fav Icon -->
+        <link rel="icon" href="images/favicon.png" />   
+
+        <!-- Include Bootstrap -->
+        <link rel="stylesheet" href="css/bootstrap.rtl.css" />
+
+        <!-- Main StyleSheet -->
+        <link rel="stylesheet" href="css/style.css" />  
+        
+    </head>
+    <body>
+        <!--[if lte IE 9]> 
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+        <!-- main-wrapper start -->
+        <main class="main-wrapper">
+
+            <!-- profit-area start -->
+            <section class="profit-area boosters-area">                
+                <div class="tasks-item">
+                    <div class="tasks-item-inner">
+                        <h2>Задания</h2>
+                        <p>Выполняйте временные задания и играйте в мини-игры, чтобы заработать больше монет.</p>                        
+                    </div>
+                    <div class="tasks-item-inner2">
+                        <h3>Игры</h3>
+                        <div class="tasks-item-inner3 modal-02">
+                            <div class="tasks-item-inner4">
+                                <h2>Спиринмэн</h2>
+                                <p>Борись с мусором и зарабатывай дополнительные монеты!</p>
+                            </div>
+                            <div class="tasks-item-inner5">
+                                <img src="images/boosters-02.png" alt="">
+                            </div>
+                        </div>
+                        <div class="tasks-item-inner3 modal-01">
+                            <div class="tasks-item-inner4">
+                                <h2>Мусормэн</h2>
+                                <p>Ешь мусор и остерегайся ЕДРОсов в погоне за монетами!</p>
+                            </div>
+                            <div class="tasks-item-inner5">
+                                <img src="images/boosters-02.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tasks-item-inner2 tasks-item-inner6">
+                        <h3>Временные задания</h3>
+                        <div class="tasks-item-inner3">
+                            <div class="tasks-item-inner5">
+                                <img src="images/boosters-02.png" alt="">
+                            </div>
+                            <div class="tasks-item-inner8">
+                                <h2>Подпишись на канал ЛДПР</h2>
+                                <span><img src="images/modal-04.svg" alt="">1508</span>
+                            </div>
+                            <div class="tasks-item-inner9">
+                                <a href="#"><img src="images/tasks-01.svg" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- profit-area end -->
+
+            <!-- footer-area start -->
+            <footer class="footer-area">
+                <div class="footer-item">
+                    <ul>
+                        <li><a href="links.html"><img src="images/footer-01.svg" alt=""><span>Ссылки</span></a></li>
+                        <li><a href="#" class="active"><img src="images/footer-02.svg" alt=""><span>Задания</span></a></li>
+                        <li><a href="boosters.html"><img src="images/footer-03.svg" alt=""><span>Бусты</span></a></li>
+                        <li><a href="index.html"><img src="images/footer-04.svg" alt=""><span>Главная</span></a></li>
+                    </ul>
+                </div>
+            </footer>
+            <!-- footer-area end -->
+
+            <!-- modal-area start -->
+            <div class="modal-area modal-area2 modal-area3" id="modal-02">
+               <div class="modal-item">
+                   <div class="modal-item-inner4">
+                       <h2>Спиринмэн</h2>
+                       <p>Борись с мусором и зарабатывай дополнительные монеты!</p>
+                       <img src="images/modal-05.png" alt="">
+                   </div>
+                   <div class="modal-item-inner3">
+                        <a href="#">Начать игру</a>
+                   </div>
+               </div>
+               <div class="modal-close">
+                   <img src="images/modal-close.svg" alt="">
+               </div>
+            </div>
+            <!-- modal-area end -->
+
+            <!-- modal-area start -->
+            <div class="modal-area modal-area2 modal-area4" id="modal-01">
+               <div class="modal-item">
+                   <div class="modal-item-inner4">
+                       <h2>Твоя награда:</h2>
+                       <h3><img src="images/modal-06.svg" alt="">+500</h3>
+                       <p>Борись с мусором и зарабатывай дополнительные монеты!</p>
+                       <img src="images/modal-05.png" alt="">
+                   </div>
+                   <div class="modal-item-inner3">
+                        <a href="#" id="start-game">Играть снова</a>
+                   </div>
+               </div>
+               <div class="modal-close">
+                   <img src="images/modal-close.svg" alt="">
+               </div>
+            </div>
+            <!-- modal-area end -->
+
+            <!-- Добавляем контейнер для игры -->
+            <div id="game-container" style="display:none;">
+                <div id="game"></div>
+                <div id="timer">Time: 30s</div>
+                <div id="score">Score: 0</div>
+            </div>
+
+        </main>
+        <!-- main-wrapper end -->
+
+
+        <!-- Main jQuery -->
+        <script src="js/jquery-3.4.1.min.js"></script>       
+   
+        <!-- Bootstrap jQuery -->
+        <script src="js/bootstrap.bundle.js"></script>
+
+        <!-- Fontawesome Script -->
+        <script src="https://kit.fontawesome.com/7749c9f08a.js"></script>
+        
+        <!-- Custom jQuery -->
+        <script src="js/scripts.js"></script>
+        
+        <!-- Подключаем скрипт игры -->
+        <script src="js/game.js"></script>
+
+        <script>
+            document.getElementById('start-game').addEventListener('click', function(e) {
+                e.preventDefault();
+                // Скрываем другие элементы и показываем игру
+                document.querySelector('.profit-area').style.display = 'none';
+                document.getElementById('game-container').style.display = 'block';
+                
+                // Если нужно перезапускать игру при каждом нажатии
+                if (typeof startGame === 'function') {
+                    startGame();
+                }
+            });
+        </script>
+
+        <script>
+            document.addEventListener('gesturestart', function(e) {
+                e.preventDefault();
+                // special hack to prevent zoom-to-tabs gesture in safari
+                document.body.style.zoom = 0.99;
+            });
+
+            document.addEventListener('gesturechange', function(e) {
+                e.preventDefault();
+                // special hack to prevent zoom-to-tabs gesture in safari
+                document.body.style.zoom = 0.99;
+            });
+
+            document.addEventListener('gestureend', function(e) {
+                e.preventDefault();
+                // special hack to prevent zoom-to-tabs gesture in safari
+                document.body.style.zoom = 0.99;
+            });
+
+            // Disable Right Mouse Click Using jQuery
+            $(document).ready(function () {
+                //Disable full page
+                $("body").on("contextmenu",function(e){
+                    return false;
+                });
+                 
+                //Disable part of page
+                $("#id").on("contextmenu",function(e){
+                    return false;
+                });
+            });
+
+            //Disable Cut, Copy, Paste Using jQuery
+            $(document).ready(function () {
+                //Disable full page
+                $('body').bind('cut copy paste', function (e) {
+                    e.preventDefault();
+                });
+                 
+                //Disable part of page
+                $('#id').bind('cut copy paste', function (e) {
+                    e.preventDefault();
+                });
+            });
+
+            //Disable Right Mouse Click & Cut, Copy, Paste Using jQuery
+            $(document).ready(function () {
+                //Disable cut copy paste
+                $('body').bind('cut copy paste', function (e) {
+                    e.preventDefault();
+                });
+                
+                //Disable mouse right click
+                $("body").on("contextmenu",function(e){
+                    return false;
+                });
+            });
+
+        </script>
+        
+    </body>
+</html>

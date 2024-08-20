@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+    <head>
+        <!-- Meta setup -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="keywords" content="">
+        <meta name="decription" content="">
+        <meta name="designer" content="">
+        
+        <!-- Title -->
+        <title>Welcome</title>
+        
+        <!-- Fav Icon -->
+        <link rel="icon" href="images/favicon.png" />   
+
+        <!-- Include Bootstrap -->
+        <link rel="stylesheet" href="css/bootstrap.rtl.css" />
+
+
+        <!-- Main StyleSheet -->
+        <link rel="stylesheet" href="css/style.css" />  
+        
+    </head>
+    <body>
+        <!--[if lte IE 9]> <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p><![endif]-->
+
+        <!-- main-wrapper start -->
+        <main class="main-wrapper">
+
+            <!-- profit-area start -->
+            <section class="profit-area">
+                <div class="profit-item">
+                    <div class="profit-item-inner">
+                        <div class="profit-item-inner2">
+                            <h3>Дней до выборов</h3>
+                            <h2 id="days-to-election">37</h2>
+                        </div>
+                    </div>
+                    <div class="profit-item-inner">
+                        <div class="profit-item-inner2">
+                            <h3>Прибыль в минуту</h3>
+                            <h2 id="income-per-minute-index">0<img src="images/profit-01.svg" alt=""></h2>
+                        </div>
+                    </div>
+                    <div class="profit-item-inner">
+                        <div class="profit-item-inner2">
+                            <h3>Прибыль за тап</h3>
+                            <h2 id="click-value-display">1<img src="images/profit-01.svg" alt=""></h2>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="profit-item2">
+                    <h3><span>0/5000</span> Заработано монет</h3>
+                    <div class="profit-item2-inner">
+                        <span style="width: 0;"></span> <!-- Шкала прогресса -->
+                    </div>
+                    <div class="profit-item2-inner2">
+                        <h2 id="total-money">0</h2>
+                    </div>
+                    <div class="profit-item2-inner3" id="click-button">
+                        <img src="images/profit-02.png" alt="">
+                    </div>
+                </div>
+            </section>
+            <!-- profit-area end -->
+
+            <!-- footer-area start -->
+            <footer class="footer-area">
+                <div class="footer-item">
+                    <ul>
+                        <li><a href="links.html"><img src="images/footer-01.svg" alt=""><span>Ссылки</span></a></li>
+                        <li><a href="tasks.html"><img src="images/footer-02.svg" alt=""><span>Задания</span></a></li>
+                        <li><a href="boosters.html"><img src="images/footer-03.svg" alt=""><span>Бусты</span></a></li>
+                        <li><a href="#" class="active"><img src="images/footer-04.svg" alt=""><span>Главная</span></a></li>
+                    </ul>
+                </div>
+            </footer>
+            <!-- footer-area end -->
+
+            <!-- modal-area start -->
+            <!-- <div class="modal-area" id="modal-01">
+               <div class="modal-item">
+                <div class="modal-item-inner">
+                    <h2>100+<img src="images/modal-01.svg" alt=""></h2>
+                    <h3>Ежедневная награда</h3>
+                    <p>Забирайте монеты за ежедневный вход в игру без пропусков!</p>
+                    <ul id="reward-list">
+                        <li>
+                            <div class="modal-item-inner2" data-day="1">
+                                <h2>День 1</h2> 
+                                <img src="images/modal-02.svg" alt="">
+                                <p>100</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="modal-item-inner2" data-day="2">
+                                <h2>День 2</h2> 
+                                <img src="images/modal-02.svg" alt="">
+                                <p>200</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="modal-item-inner2" data-day="3">
+                                <h2>День 3</h2> 
+                                <img src="images/modal-02.svg" alt="">
+                                <p>300</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="modal-item-inner2" data-day="4">
+                                <h2>День 4</h2> 
+                                <img src="images/modal-02.svg" alt="">
+                                <p>400</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="modal-item-inner2" data-day="5">
+                                <h2>День 5</h2> 
+                                <img src="images/modal-02.svg" alt="">
+                                <p>500</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="modal-item-inner2" data-day="6">
+                                <h2>День 6</h2> 
+                                <img src="images/modal-02.svg" alt="">
+                                <p>600</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="modal-item-inner2" data-day="7">
+                                <h2>День 7</h2> 
+                                <img src="images/modal-02.svg" alt="">
+                                <p>700</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="modal-item-inner2" data-day="8">
+                                <h2>День 8</h2> 
+                                <img src="images/modal-02.svg" alt="">
+                                <p>800</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="modal-item-inner3">
+                        <a href="#" id="claim-reward">Забрать</a>
+                    </div>
+                </div>
+               </div> 
+               <div class="modal-close">
+                   <img src="images/modal-close.svg" alt="">
+               </div>
+            </div> -->
+            <!-- modal-area end -->
+
+        </main>
+        <!-- main-wrapper end -->
+
+
+        <!-- Main jQuery -->
+        <script src="js/jquery-3.4.1.min.js"></script>       
+   
+        <!-- Bootstrap jQuery -->
+        <script src="js/bootstrap.bundle.js"></script>
+
+        <!-- Fontawesome Script -->
+        <script src="https://kit.fontawesome.com/7749c9f08a.js"></script>
+        
+        <!-- Custom jQuery -->
+        <script src="js/scripts.js"></script>
+
+        <script>
+            
+            document.addEventListener('gesturestart', function(e) {
+                e.preventDefault();
+                // special hack to prevent zoom-to-tabs gesture in safari
+                document.body.style.zoom = 0.99;
+            });
+
+            document.addEventListener('gesturechange', function(e) {
+                e.preventDefault();
+                // special hack to prevent zoom-to-tabs gesture in safari
+                document.body.style.zoom = 0.99;
+            });
+
+            document.addEventListener('gestureend', function(e) {
+                e.preventDefault();
+                // special hack to prevent zoom-to-tabs gesture in safari
+                document.body.style.zoom = 0.99;
+            });
+
+            // Disable Right Mouse Click Using jQuery
+            $(document).ready(function () {
+                //Disable full page
+                $("body").on("contextmenu",function(e){
+                    return false;
+                });
+                 
+                //Disable part of page
+                $("#id").on("contextmenu",function(e){
+                    return false;
+                });
+            });
+
+            //Disable Cut, Copy, Paste Using jQuery
+            $(document).ready(function () {
+                //Disable full page
+                $('body').bind('cut copy paste', function (e) {
+                    e.preventDefault();
+                });
+                 
+                //Disable part of page
+                $('#id').bind('cut copy paste', function (e) {
+                    e.preventDefault();
+                });
+            });
+
+            //Disable Right Mouse Click & Cut, Copy, Paste Using jQuery
+            $(document).ready(function () {
+                //Disable cut copy paste
+                $('body').bind('cut copy paste', function (e) {
+                    e.preventDefault();
+                });
+                
+                //Disable mouse right click
+                $("body").on("contextmenu",function(e){
+                    return false;
+                });
+            });
+
+        </script>
+
+    </body>
+</html>

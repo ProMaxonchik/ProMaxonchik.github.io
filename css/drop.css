@@ -1,0 +1,113 @@
+/* Основной контейнер для игры */
+body, html {
+    overflow: hidden; /* Отключаем прокрутку на всей странице */
+    height: 100%; /* Устанавливаем высоту на 100%, чтобы страница не превышала размер экрана */
+    margin: 0; /* Убираем отступы, которые могут повлиять на размер */
+}
+
+#game {
+    position: relative;
+    width: 36vw; /* Ширина 100% от ширины видимой области */
+    height: 100vh; /* Высота 100% от высоты видимой области */
+    overflow: hidden; /* Скрытие элементов, выходящих за пределы контейнера */
+    background: url('../photos/background.png') no-repeat center center; /* Установка картинки фоном */
+    background-size: cover; /* Масштабирование картинки на весь экран */
+    z-index: 1000;
+}
+
+/* Общие стили для всех игровых объектов */
+.star, .bomb, .freeze {
+    position: absolute;
+    width: 40px; /* Базовый размер элементов */
+    height: 40px;
+    border-radius: 50%; /* Круглая форма */
+    pointer-events: auto; /* Делаем элементы кликабельными */
+    background-size: cover; /* Обеспечивает, что изображение будет масштабироваться */
+}
+
+/* Стили для звездочек */
+.star {
+    background-image: url('../photos/star.png'); /* Путь к PNG-файлу для звездочек */
+}
+
+/* Стили для бомбочек */
+.bomb {
+    background-image: url('../photos/bomb.png'); /* Путь к PNG-файлу для бомбочек */
+}
+
+/* Стили для синих кружочков */
+.freeze {
+    background-image: url('../photos/freeze.png'); /* Путь к PNG-файлу для синих кружочков */
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 600px) {
+    .star, .bomb, .freeze {
+        width: 30px; /* Уменьшенные размеры для маленьких экранов */
+        height: 30px;
+    }
+}
+
+@media (max-width: 400px) {
+    .star, .bomb, .freeze {
+        width: 25px; /* Еще меньше для очень маленьких экранов */
+        height: 25px;
+    }
+}
+
+/* Стили для отображения счета */
+#score {
+    position: fixed;
+    top: 15px;
+    left: 490px;
+    color: white; 
+    /* font-size: 24px;*/
+    z-index: 1010; /* Ставим выше других элементов */
+}
+
+#timer {
+    position: fixed;
+    top: 15px;
+    right: 500px;
+    color: white;
+    /* font-size: 24px; */
+    z-index: 1010;
+}
+
+@keyframes star-burst-animation {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+.star.clicked {
+    animation: star-burst-animation 0.5s forwards;
+}
+
+.particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: yellow;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 1;
+    animation: particle-animation 0.7s forwards;
+    transform-origin: center;
+}
+
+@keyframes particle-animation {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
