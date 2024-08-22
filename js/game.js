@@ -12,7 +12,11 @@ function createStar() {
     const star = document.createElement('div');
     star.classList.add('star');
 
-    const x = Math.random() * (window.innerWidth - 1000);
+    // Теперь берем ширину окна, чтобы учитывать только видимую область
+    const gameWidth = window.innerWidth;
+
+    // Генерация позиции x в пределах видимой области
+    const x = Math.random() * (gameWidth - 100); // 100 - ширина звездочки
     const y = -40;
     star.style.left = `${x}px`;
     star.style.top = `${y}px`;
@@ -27,7 +31,7 @@ function createStar() {
 
         const currentTop = parseFloat(star.style.top);
         if (currentTop < window.innerHeight) {
-            star.style.top = `${currentTop + 5}px`;
+            star.style.top = `${currentTop + 7}px`;
             requestAnimationFrame(animateStar);
         } else {
             star.remove();
@@ -36,22 +40,28 @@ function createStar() {
 
     animateStar();
 
-    star.addEventListener('click', () => {
-        if (gameOver) return;
-        score++;
-        scoreDisplay.textContent = `Score: ${score}`;
-        star.classList.add('clicked');
-        
-        // Определяем центр звездочки для создания частиц
-        const starRect = star.getBoundingClientRect();
-        const starCenterX = starRect.left + starRect.width / 2 - 470;
-        const starCenterY = starRect.top + starRect.height / 2;
-
-        createParticles(starCenterX, starCenterY);
-        
-        setTimeout(() => {
-            star.remove();
-        }, 500); // Убираем звездочку после завершения анимации
+    star.addEventListener('touchstart', (event) => {
+        event.preventDefault(); // предотвращаем нежелательные действия браузера
+    
+        // Логика аналогична обработчику click
+        const rect = star.getBoundingClientRect();
+        const touchX = event.touches[0].clientX - rect.left;
+        const touchY = event.touches[0].clientY - rect.top;
+    
+        if (touchX >= 0 && touchX <= rect.width && touchY >= 0 && touchY <= rect.height) {
+            if (gameOver) return;
+            score++;
+            scoreDisplay.textContent = `Score: ${score}`;
+            star.classList.add('clicked');
+    
+            const starCenterX = rect.left + rect.width / 2;
+            const starCenterY = rect.top + rect.height / 2;
+            createParticles(starCenterX, starCenterY);
+    
+            setTimeout(() => {
+                star.remove();
+            }, 500);
+        }
     });
 }
 
@@ -82,7 +92,11 @@ function createBomb() {
     const bomb = document.createElement('div');
     bomb.classList.add('bomb');
 
-    const x = Math.random() * (window.innerWidth - 1000);
+    // Определяем ширину окна
+    const gameWidth = window.innerWidth;
+
+    // Генерация позиции x в пределах видимой области
+    const x = Math.random() * (gameWidth - 100); // 100 - это ширина бомбы
     const y = -40;
     bomb.style.left = `${x}px`;
     bomb.style.top = `${y}px`;
@@ -106,10 +120,17 @@ function createBomb() {
 
     animateBomb();
 
-    bomb.addEventListener('click', () => {
-        if (gameOver) return;
-        gameOver = true;
-        gameContainer.innerHTML = '';
+    bomb.addEventListener('touchstart', (event) => {
+        event.preventDefault();
+
+        const rect = bomb.getBoundingClientRect();
+        const touchX = event.touches[0].clientX - rect.left;
+        const touchY = event.touches[0].clientY - rect.top;
+
+        if (touchX >= 0 && touchX <= rect.width && touchY >= 0 && touchY <= rect.height) {
+            if (gameOver) return;
+            endGame();
+        }
     });
 }
 
@@ -119,7 +140,11 @@ function createFreeze() {
     const freeze = document.createElement('div');
     freeze.classList.add('freeze');
 
-    const x = Math.random() * (window.innerWidth - 1000);
+    // Определяем ширину окна
+    const gameWidth = window.innerWidth;
+
+    // Генерация позиции x в пределах видимой области
+    const x = Math.random() * (gameWidth - 100); // 100 - это ширина объекта freeze
     const y = -40;
     freeze.style.left = `${x}px`;
     freeze.style.top = `${y}px`;
@@ -134,7 +159,7 @@ function createFreeze() {
 
         const currentTop = parseFloat(freeze.style.top);
         if (currentTop < window.innerHeight) {
-            freeze.style.top = `${currentTop + 5}px`;
+            freeze.style.top = `${currentTop + 7}px`;
             requestAnimationFrame(animateFreeze);
         } else {
             freeze.remove();
@@ -143,13 +168,21 @@ function createFreeze() {
 
     animateFreeze();
 
-    freeze.addEventListener('click', () => {
-        if (gameOver) return;
-        isFrozen = true;
-        setTimeout(() => {
-            isFrozen = false;
-        }, 4000);
-        freeze.remove();
+    freeze.addEventListener('touchstart', (event) => {
+        event.preventDefault();
+
+        const rect = freeze.getBoundingClientRect();
+        const touchX = event.touches[0].clientX - rect.left;
+        const touchY = event.touches[0].clientY - rect.top;
+
+        if (touchX >= 0 && touchX <= rect.width && touchY >= 0 && touchY <= rect.height) {
+            if (gameOver) return;
+            isFrozen = true;
+            setTimeout(() => {
+                isFrozen = false;
+            }, 4000);
+            freeze.remove();
+        }
     });
 }
 
@@ -169,7 +202,7 @@ function spawnItems() {
                 createFreeze();
             }
         }
-    }, 400);
+    }, 300);
 }
 
 function startTimer() {
@@ -213,8 +246,19 @@ function endGame() {
     // Передача очков в основную игру
     convertScoreToCoins(score);
 
+    // Открываем модальное окно для "Мусормэн"
+    openModal('modal-04');
+
     // Закрываем игру и возвращаемся на главную страницу кликера
     closeGameAndReturnToMain();
+}
+
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'block';
+        modal.classList.add('modal-active');
+    }
 }
 
 function convertScoreToCoins(score) {
@@ -223,7 +267,7 @@ function convertScoreToCoins(score) {
 
     // Рассчитываем количество монет по формуле (очки + 10) * clickValue
     const coinsEarned = (score + 10) * clickValue;
-
+    document.getElementById('drop-game-profit').innerHTML = `<img src="images/profit-01.svg" alt=""> ${coinsEarned} +`;
     // Передаем заработанные монеты в основную игру
     let totalMoney = parseInt(localStorage.getItem('totalMoney')) || 0;
     totalMoney += coinsEarned;

@@ -1,16 +1,32 @@
 (function($){
-    jQuery(document).ready(function() {    
+    jQuery(document).ready(function() {   
+        
+        // Check if there's a Pacman score stored
+        const pacmanScore = parseInt(localStorage.getItem('pacmanScore'));
+        if (pacmanScore) {
+
+            let totalMoney = parseInt(localStorage.getItem('totalMoney')) || 0;
+            totalMoney += pacmanScore;
+            localStorage.setItem('totalMoney', totalMoney);
+            document.getElementById('spirinman-profit').innerHTML = `<img src="images/profit-01.svg" alt=""> ${pacmanScore} +`;
+
+
+            // Clear the Pacman score from localStorage
+            localStorage.removeItem('pacmanScore');
+        }
+
         let totalMoney = parseInt(localStorage.getItem('totalMoney')) || 0;
         let progressMoney = parseInt(localStorage.getItem('progressMoney')) || 0; // Деньги для прогресса
         const maxMoney = 5000;  // Максимальное значение для шкалы
         let clickValue = parseInt(localStorage.getItem('clickValue')) || 1;  // Изначальная прибыль за клик
-        let upgradeCost = parseInt(localStorage.getItem('upgradeCost')) || 150; // Изначальная стоимость улучшения
+        let upgradeCost = parseInt(localStorage.getItem('upgradeCost')) || 1000; // Изначальная стоимость улучшения
         let incomePerMinute = parseInt(localStorage.getItem('incomePerMinute')) || 0; // Изначальная прибыль в минуту
-        let upgradeIncomeCost = parseInt(localStorage.getItem('upgradeIncomeCost')) || 200; // Изначальная стоимость улучшения прибыли в минуту
-        let cityCleaningIncomeCost = parseInt(localStorage.getItem('cityCleaningIncomeCost')) || 600; // Изначальная стоимость улучшения прибыли на 8 в минуту
+        let upgradeIncomeCost = parseInt(localStorage.getItem('upgradeIncomeCost')) || 1000; // Изначальная стоимость улучшения прибыли в минуту
+        let cityCleaningIncomeCost = parseInt(localStorage.getItem('cityCleaningIncomeCost')) || 2000; // Изначальная стоимость улучшения прибыли на 8 в минуту
         let upgradeIncomeLevel = parseInt(localStorage.getItem('upgradeIncomeLevel')) || 0; // Изначальный уровень улучшения команды
         let cleaningIncomeLevel = parseInt(localStorage.getItem('cleaningIncomeLevel')) || 0; // Изначальный уровень улучшения уборки мусора
         let cityCleansingLevel = parseInt(localStorage.getItem('cityCleansingLevel')) || 0; // Изначальный уровень очищения города
+        let incomeInterval;
 
         // Функция для сброса игры
         function resetGame() {
@@ -18,10 +34,10 @@
             totalMoney = 0;
             progressMoney = 0;
             clickValue = 1;
-            upgradeCost = 150;
+            upgradeCost = 1000;
             incomePerMinute = 0;
-            upgradeIncomeCost = 200;
-            cityCleaningIncomeCost = 600;
+            upgradeIncomeCost = 1000;
+            cityCleaningIncomeCost = 2000;
             upgradeIncomeLevel = 0; // Сбрасываем уровень до 0
             cleaningIncomeLevel = 0; // Сбрасываем уровень уборки мусора до 0
             cityCleansingLevel = 0; // Сбрасываем уровень очищения города до 0
@@ -37,7 +53,7 @@
             updateCityCleansingLevelDisplay(); // Обновляем уровень очищения города
         }
 
-        
+        // resetGame()
 
         // Функция для открытия модального окна, если оно не открывалось сегодня
         function openModalOncePerDay() {
@@ -168,7 +184,7 @@
             if (totalMoney >= cost) {
                 totalMoney -= cost; // Списываем деньги
                 clickValue += 1; // Увеличиваем прибыль за клик
-                upgradeCost += 50; // Увеличиваем стоимость улучшения
+                upgradeCost *= 2; // Увеличиваем стоимость улучшения
                 upgradeIncomeLevel += 1; // Увеличиваем уровень на 1
 
                 // Обновляем отображение
@@ -191,7 +207,7 @@
                 totalMoney -= cost; // Списываем деньги
                 incomePerMinute += 2; // Увеличиваем прибыль в минуту на 2
                 cleaningIncomeLevel += 1; // Увеличиваем уровень уборки мусора
-                upgradeIncomeCost += 50; // Увеличиваем стоимость улучшения
+                upgradeIncomeCost *= 2; // Увеличиваем стоимость улучшения
 
                 // Обновляем отображение
                 updateTotalMoneyDisplay();
@@ -213,7 +229,7 @@
                 totalMoney -= cost; // Списываем деньги
                 incomePerMinute += 8; // Увеличиваем прибыль в минуту на 8
                 cityCleansingLevel += 1; // Увеличиваем уровень очищения города
-                cityCleaningIncomeCost += 50; // Увеличиваем стоимость улучшения
+                cityCleaningIncomeCost *= 2; // Увеличиваем стоимость улучшения
 
                 // Обновляем отображение
                 updateTotalMoneyDisplay();
@@ -227,8 +243,9 @@
         });
 
         // Функция для равномерного добавления прибыли в минуту к общей сумме и увеличения прогресса
-        function distributeIncome() {
-            setInterval(function() {
+        // Функция для запуска начисления прибыли
+        function startDistributingIncome() {
+            incomeInterval = setInterval(function() {
                 if (incomePerMinute > 0) {
                     const incomePerSecond = Math.floor(incomePerMinute / 60); // Основной доход за секунду
                     const additionalIncome = incomePerMinute % 60; // Остаток для распределения
@@ -242,14 +259,33 @@
                     }
 
                     updateTotalMoneyDisplay();
-                    updateProgress();
                     saveToLocalStorage();
                 }
             }, 1000); // Обновляем каждую секунду
         }
 
-        // Обработчик кликов по кнопке
-        jQuery('#click-button').on('click', function () {
+        function stopDistributingIncome() {
+            clearInterval(incomeInterval);
+        }
+
+        // Запуск начисления прибыли, когда страница загружена
+        startDistributingIncome();
+
+        // Останавливаем начисление при закрытии страницы
+        $(window).on('beforeunload', function() {
+            stopDistributingIncome();
+        });
+
+        // Останавливаем начисление, если пользователь переключается на другую вкладку
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                stopDistributingIncome();
+            } else {
+                startDistributingIncome();
+            }
+        });
+
+        function handleTap() {
             if (progressMoney < maxMoney) {
                 totalMoney += clickValue;
                 progressMoney += clickValue;
@@ -259,17 +295,29 @@
             }
 
             if (progressMoney >= maxMoney) {
-                clickValue *= 2;
+                clickValue += 1;
                 progressMoney = 0; // Сбрасываем прогресс шкалы
                 updateProgress();
                 updateClickValueDisplay();
                 saveToLocalStorage();
             }
 
-            jQuery(this).addClass('active');
+            jQuery('#click-button').addClass('active');
             setTimeout(function() {
                 jQuery('#click-button').removeClass('active');
             }, 200);
+        }
+
+        // Обработчик кликов по кнопке
+        jQuery('#click-button').on('click', function () {
+            handleTap();
+        });
+
+        // Добавляем поддержку касания двумя пальцами
+        jQuery('#click-button').on('touchstart', function (e) {
+            if (e.touches.length === 2) {
+                handleTap();
+            }
         });
 
         // Инициализация отображений и запуск распределения дохода
@@ -277,12 +325,10 @@
         updateTotalMoneyDisplay();
         updateIncomePerMinuteDisplay();
         updateUpgradeButtons();
-        updateProgress();
         updateDaysToElection(); // Обновляем дни до выборов
         updateIncomeLevelDisplay(); // Обновляем уровень команды при загрузке
         updateCleaningIncomeLevelDisplay(); // Обновляем уровень уборки мусора при загрузке
         updateCityCleansingLevelDisplay(); // Обновляем уровень очищения города при загрузке
-        distributeIncome();
 
         // Проверка и открытие модального окна один раз в день
         openModalOncePerDay();

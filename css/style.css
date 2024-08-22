@@ -41,6 +41,7 @@ label,
 button {
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 p {
@@ -83,6 +84,9 @@ body {
     font-weight: 300;    
     background: linear-gradient(180deg, #2350A9 0%, #060053 42%);
     color: #fff;
+    overflow: hidden; /* Отключаем прокрутку на всей странице */
+    height: 100%; /* Устанавливаем высоту на 100%, чтобы страница не превышала размер экрана */
+    margin: 0; /* Убираем отступы, которые могут повлиять на размер */
 }
 
 html, body {
@@ -93,6 +97,9 @@ html, body {
     -ms-user-select: none;       /* Internet Explorer/Edge*/
     user-select: none;
     height: 100%;  
+    overflow: hidden; /* Отключаем прокрутку на всей странице */
+    height: 100%; /* Устанавливаем высоту на 100%, чтобы страница не превышала размер экрана */
+    margin: 0; /* Убираем отступы, которые могут повлиять на размер */
 }
 
 /* main-wrapper start */
@@ -235,24 +242,24 @@ html, body {
 
 .profit-item2-inner3 {
     width: 329px;
-    height: 329px;
-    border-radius: 50%;
+    height: calc(100vh - 20px);
+    border-radius: 10px; /* Закругляем углы, если нужно */
     display: block;
     margin: 0 auto;
     box-shadow: 3px 3px 42px 0px #000;
+    background-color: #2350A9; /* Цвет фона кнопки */
+    cursor: pointer; /* Указатель курсора при наведении */
+    position: relative; 
+    background-image: url('../images/profit-02.png');
+    background-size: contain;
 }
 
-.profit-item2-inner3 img {
-    max-width: 100%;
-}
 
 .profit-item2-inner3.active {
-    transform: matrix(0.9, 0, 0, 0.9, 0, 0);
-    box-shadow: 3px 3px 42.9px 0px rgba(194, 133, 22, 0.70);
-    transition: 0.2s all ease;
-    -webkit-transition: 0.2s all ease;
-    -moz-transition: 0.2s all ease;
+    background-image: url('../images/profit-02-active.png'); /* Путь к новой картинке */
+    background-size: contain;
 }
+
 
 /* footer-area start */
 

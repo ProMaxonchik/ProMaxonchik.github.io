@@ -1,29 +1,39 @@
 /* Основной контейнер для игры */
 body, html {
-    overflow: hidden; /* Отключаем прокрутку на всей странице */
-    height: 100%; /* Устанавливаем высоту на 100%, чтобы страница не превышала размер экрана */
-    width: 100vw; /* Ширина 100% от ширины видимой области */
-    margin: 0; /* Убираем отступы, которые могут повлиять на размер */
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
 }
 
 #game {
-    position: relative;
-    width: 100vw; /* Ширина 100% от ширины видимой области */
-    height: 100vh; /* Высота 100% от высоты видимой области */
-    overflow: hidden; /* Скрытие элементов, выходящих за пределы контейнера */
-    background: url('../photos/background.png') no-repeat center center; /* Установка картинки фоном */
-    background-size: cover; /* Масштабирование картинки на весь экран */
+    position: fixed; /* Изменено на fixed, чтобы контейнер всегда оставался в пределах экрана */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: url('../photos/background.png') no-repeat center center;
+    background-size: cover;
     z-index: 1000;
 }
 
 /* Общие стили для всех игровых объектов */
 .star, .bomb, .freeze {
     position: absolute;
-    width: 100px; /* Базовый размер элементов */
-    height: 100px;
+    width: 70px; /* Увеличенные размеры элементов */
+    height: 70px;
     border-radius: 50%; /* Круглая форма */
     pointer-events: auto; /* Делаем элементы кликабельными */
     background-size: cover; /* Обеспечивает, что изображение будет масштабироваться */
+    box-sizing: border-box; /* Учитываем padding и border в размере элемента */
+    touch-action: manipulation; /* Улучшение обработки касаний на мобильных устройствах */
+    /* transform: translateY(+50%); */
 }
 
 /* Стили для звездочек */
@@ -44,23 +54,23 @@ body, html {
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 600px) {
     .star, .bomb, .freeze {
-        width: 30px; /* Уменьшенные размеры для маленьких экранов */
-        height: 30px;
+        width: 70px; /* Уменьшенные размеры для маленьких экранов */
+        height: 70px;
     }
 }
 
 @media (max-width: 400px) {
     .star, .bomb, .freeze {
-        width: 25px; /* Еще меньше для очень маленьких экранов */
-        height: 25px;
+        width: 60px; /* Еще меньше для очень маленьких экранов */
+        height: 60px;
     }
 }
 
 /* Стили для отображения счета */
 #score {
     position: fixed;
-    top: 15px;
-    left: 490px;
+    top: 10px;
+    left: 10px;
     color: white; 
     /* font-size: 24px;*/
     z-index: 1010; /* Ставим выше других элементов */
@@ -68,8 +78,8 @@ body, html {
 
 #timer {
     position: fixed;
-    top: 15px;
-    right: 500px;
+    top: 10px;
+    right: 10px;
     color: white;
     /* font-size: 24px; */
     z-index: 1010;

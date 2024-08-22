@@ -99,7 +99,7 @@
                        <img src="images/modal-05.png" alt="">
                    </div>
                    <div class="modal-item-inner3">
-                        <a href="#">Начать игру</a>
+                        <a href="Spirinman main/index.html">Начать игру</a>
                    </div>
                </div>
                <div class="modal-close">
@@ -112,19 +112,52 @@
             <div class="modal-area modal-area2 modal-area4" id="modal-01">
                <div class="modal-item">
                    <div class="modal-item-inner4">
-                       <h2>Твоя награда:</h2>
-                       <h3><img src="images/modal-06.svg" alt="">+500</h3>
+                       <h2>Мусормэн</h2>
                        <p>Борись с мусором и зарабатывай дополнительные монеты!</p>
                        <img src="images/modal-05.png" alt="">
                    </div>
                    <div class="modal-item-inner3">
-                        <a href="#" id="start-game">Играть снова</a>
+                        <a href="#" id="start-game">Начать игру</a>
                    </div>
                </div>
                <div class="modal-close">
                    <img src="images/modal-close.svg" alt="">
                </div>
             </div>
+
+
+            <!-- modal area "play again" -->
+            <div class="modal-area modal-area2 modal-area5" id="modal-03">
+                <div class="modal-item">
+                    <div class="modal-item-inner4">
+                        <h3>:ты заработал</h3>
+                        <h2 id="spirinman-profit">0<img src="images/profit-01.svg" alt=""></h2>
+                        <img src="images/modal-05.png" alt="">
+                    </div>
+                    <div class="modal-item-inner3">
+                         <a href="Spirinman main/index.html">играть снова</a>
+                    </div>
+                </div>
+                <div class="modal-close">
+                    <img src="images/modal-close.svg" alt="">
+                </div>
+             </div>
+
+             <div class="modal-area modal-area2 modal-area6" id="modal-04">
+                <div class="modal-item">
+                    <div class="modal-item-inner4">
+                        <h3>:ты заработал</h3>
+                        <h2 id="drop-game-profit">0<img src="images/profit-01.svg" alt=""></h2>
+                        <img src="images/modal-05.png" alt="">
+                    </div>
+                    <div class="modal-item-inner3">
+                         <a href="#" id="start-game">играть снова</a>
+                    </div>
+                </div>
+                <div class="modal-close">
+                    <img src="images/modal-close.svg" alt="">
+                </div>
+             </div>
             <!-- modal-area end -->
 
             <!-- Добавляем контейнер для игры -->
@@ -159,12 +192,38 @@
                 // Скрываем другие элементы и показываем игру
                 document.querySelector('.profit-area').style.display = 'none';
                 document.getElementById('game-container').style.display = 'block';
-                
+                const modal = document.getElementById('modal-01');
+                    if (modal) {
+                        modal.style.display = 'none';
+                    }
                 // Если нужно перезапускать игру при каждом нажатии
                 if (typeof startGame === 'function') {
                     startGame();
                 }
             });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Проверяем, есть ли флаг для открытия модального окна
+                const shouldOpenModal = localStorage.getItem('openSpirinmanModal');
+
+                if (shouldOpenModal === 'true') {
+                    // Открываем модальное окно для Спиринмэн
+                    openModal('modal-03');
+
+                    // Удаляем флаг, чтобы модальное окно не открылось снова при следующей загрузке
+                    localStorage.removeItem('openSpirinmanModal');
+                }
+            });
+
+            function openModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.display = 'block';
+                    modal.classList.add('modal-active');
+                }
+            }
         </script>
 
         <script>
