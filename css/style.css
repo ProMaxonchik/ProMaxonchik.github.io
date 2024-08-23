@@ -238,30 +238,28 @@ html, body {
     font-size: 64px;
     font-weight: 600;
     margin-top: 20px;
-    margin-bottom: 0px;
+    margin-bottom: 35px;
 }
 
 .profit-item2-inner3 {
-    left: 20px;
-    width: 400px; /* Ширина блока уменьшена */
-    height: 400px; /* Высота блока уменьшена */
-    border-radius: 10px;
+    width: 329px;
+    height: 329px;
+    border-radius: 50%;
     display: block;
     margin: 0 auto;
-    cursor: pointer;
-    position: relative; 
-    background-image: url('../images/profit-02.png'); /* Изображение */
-    background-size: contain; /* Изображение подстраивается под размер блока, сохраняя пропорции */
-    background-repeat: no-repeat; /* Отключаем повторение */
-    background-position: center center; /* Центрируем изображение */
+    box-shadow: 3px 3px 42px 0px #000;
+}
+
+.profit-item2-inner3 img {
+    max-width: 100%;
 }
 
 .profit-item2-inner3.active {
-    left: 20px;
-    background-image: url('../images/profit-02-active.png'); /* Активное изображение */
-    background-size: contain; /* Изображение подстраивается под размер блока, сохраняя пропорции */
-    background-repeat: no-repeat;
-    background-position: center center;
+    transform: matrix(0.9, 0, 0, 0.9, 0, 0);
+    box-shadow: 3px 3px 42.9px 0px rgba(194, 133, 22, 0.70);
+    transition: 0.2s all ease;
+    -webkit-transition: 0.2s all ease;
+    -moz-transition: 0.2s all ease;
 }
 
 
