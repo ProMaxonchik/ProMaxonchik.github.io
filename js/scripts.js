@@ -137,7 +137,7 @@
         function updateProgress() {
             const progressPercentage = (progressMoney / maxMoney) * 100;
             jQuery('.profit-item2-inner span').css('width', `${progressPercentage}%`);
-            jQuery('.profit-item2 h3 span').text(`${progressMoney}/${maxMoney}`);
+            jQuery('.profit-item2 h3 span').text(`${progressMoney - 1}/${maxMoney}`);
         }
 
         // Сохранение данных в LocalStorage

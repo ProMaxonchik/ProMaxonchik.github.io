@@ -1,14 +1,14 @@
 /*=== web fonts ===*/
 
 @font-face {
-    font-family: 'Museo-Sans-Cyrl';
-    src: url('../webfonts/Museo-Sans-Cyrl-300.ttf');
-    font-weight: 300;
+    font-family: 'Helvetica';
+    src: url('css/helvetica_regular.otf');
+    font-weight: 400;
 }
 
 @font-face {
-    font-family: 'Museo-Sans-Cyrl';
-    src: url('../webfonts/Museo-Sans-Cyrl-500.ttf');
+    font-family: 'Helvetica';
+    src: url('css/helvetica_regular.otf');
     font-weight: 500;
 }
 
@@ -79,9 +79,9 @@ img {
 }
 
 body {  
-    font-family: "Museo-Sans-Cyrl";
+    font-family: "Helvetica";
     font-size: 16px;
-    font-weight: 300;    
+    font-weight: 400;    
     background: linear-gradient(180deg, #2350A9 0%, #060053 42%);
     color: #fff;
     overflow: hidden; /* Отключаем прокрутку на всей странице */
@@ -237,27 +237,29 @@ html, body {
     text-align: center;
     font-size: 64px;
     font-weight: 600;
-    margin-bottom: 27px;
+    margin-top: 20px;
+    margin-bottom: 0px;
 }
 
 .profit-item2-inner3 {
-    width: 329px;
-    height: calc(100vh - 20px);
-    border-radius: 10px; /* Закругляем углы, если нужно */
+    width: 400px; /* Ширина блока уменьшена */
+    height: 400px; /* Высота блока уменьшена */
+    border-radius: 10px;
     display: block;
     margin: 0 auto;
-    box-shadow: 3px 3px 42px 0px #000;
-    background-color: #2350A9; /* Цвет фона кнопки */
-    cursor: pointer; /* Указатель курсора при наведении */
+    cursor: pointer;
     position: relative; 
-    background-image: url('../images/profit-02.png');
-    background-size: contain;
+    background-image: url('../images/profit-02.png'); /* Изображение */
+    background-size: contain; /* Изображение подстраивается под размер блока, сохраняя пропорции */
+    background-repeat: no-repeat; /* Отключаем повторение */
+    background-position: center center; /* Центрируем изображение */
 }
 
-
 .profit-item2-inner3.active {
-    background-image: url('../images/profit-02-active.png'); /* Путь к новой картинке */
-    background-size: contain;
+    background-image: url('../images/profit-02-active.png'); /* Активное изображение */
+    background-size: contain; /* Изображение подстраивается под размер блока, сохраняя пропорции */
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 
@@ -777,3 +779,8 @@ html, body {
     margin-left: auto;
 }
 
+.no-time{
+    font-size: 16px;
+    font-weight: 300;
+    text-align: center;
+}

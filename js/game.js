@@ -51,7 +51,7 @@ function createStar() {
         if (touchX >= 0 && touchX <= rect.width && touchY >= 0 && touchY <= rect.height) {
             if (gameOver) return;
             score++;
-            scoreDisplay.textContent = `Score: ${score}`;
+            scoreDisplay.textContent = `Время: ${score}`;
             star.classList.add('clicked');
     
             const starCenterX = rect.left + rect.width / 2;
@@ -226,8 +226,8 @@ function startGame() {
     isFrozen = false;
     timeLeft = 30;
     gameContainer.innerHTML = '';
-    scoreDisplay.textContent = 'Score: 0';
-    timerDisplay.textContent = 'Time: 30s';
+    scoreDisplay.textContent = 'Собрано: 0';
+    timerDisplay.textContent = 'Время: 30s';
     spawnItems();
     startTimer();
 }
