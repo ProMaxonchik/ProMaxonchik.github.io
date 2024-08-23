@@ -242,6 +242,7 @@ html, body {
 }
 
 .profit-item2-inner3 {
+    left: 10px;
     width: 400px; /* Ширина блока уменьшена */
     height: 400px; /* Высота блока уменьшена */
     border-radius: 10px;
@@ -256,6 +257,7 @@ html, body {
 }
 
 .profit-item2-inner3.active {
+    left: 10px;
     background-image: url('../images/profit-02-active.png'); /* Активное изображение */
     background-size: contain; /* Изображение подстраивается под размер блока, сохраняя пропорции */
     background-repeat: no-repeat;
